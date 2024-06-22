@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+  final VoidCallback startQuiz;
+
+  const StartScreen({super.key, required this.startQuiz});
 
   @override
   Widget build(context) {
@@ -27,7 +29,7 @@ class StartScreen extends StatelessWidget {
         ElevatedButton.icon(
           icon: const Icon(Icons.arrow_forward_rounded),
           label: const Text('Start Quiz'),
-          onPressed: () {},
+          onPressed: startQuiz,
           style: ElevatedButton.styleFrom(
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
