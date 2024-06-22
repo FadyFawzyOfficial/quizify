@@ -11,22 +11,18 @@ class Quizify extends StatefulWidget {
 }
 
 class _QuizifyState extends State<Quizify> {
-  late Widget activeScreen;
+  var isQuizStarted = false;
 
-  void switchScreen() => setState(() => activeScreen = const QuestionsScreen());
-
-  @override
-  void initState() {
-    super.initState();
-    activeScreen = StartScreen(startQuiz: switchScreen);
-  }
+  void startQuiz() => setState(() => isQuizStarted = true);
 
   @override
   Widget build(context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.purple,
-        body: activeScreen,
+        body: isQuizStarted
+            ? const QuestionsScreen()
+            : StartScreen(startQuiz: startQuiz),
       ),
     );
   }
