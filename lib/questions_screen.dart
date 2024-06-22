@@ -27,7 +27,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               fontSize: 24,
             ),
           ),
-          for (var answer in questions[0].answers)
+          for (var answer in questions[0].shuffledAnswers)
             AnswerButton(
               answer: answer,
               onPressed: () {},
