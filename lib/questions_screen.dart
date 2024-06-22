@@ -11,6 +11,8 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  var questionIndex = 0;
+
   @override
   Widget build(context) {
     return Padding(
@@ -20,17 +22,17 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            questions[0].question,
+            questions[questionIndex].question,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 24,
             ),
           ),
-          for (var answer in questions[0].shuffledAnswers)
+          for (var answer in questions[questionIndex].shuffledAnswers)
             AnswerButton(
               answer: answer,
-              onPressed: () {},
+              onPressed: () => setState(() => questionIndex++),
             ),
         ],
       ),
