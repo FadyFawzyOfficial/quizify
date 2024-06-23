@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:quizify/data/questions.dart';
 
+import 'data/questions.dart';
 import 'questions_screen.dart';
+import 'result_screen.dart';
 import 'start_screen.dart';
+
+enum ActiveScreen { start, questions, result }
 
 class Quizify extends StatefulWidget {
   const Quizify({super.key});
@@ -13,9 +16,9 @@ class Quizify extends StatefulWidget {
 
 class _QuizifyState extends State<Quizify> {
   List<String> answers = [];
-  var isQuizStarted = false;
+  var activeScreen = ActiveScreen.start;
 
-  void startQuiz() => setState(() => isQuizStarted = true);
+  void startQuiz() => setState(() => activeScreen = ActiveScreen.questions);
 
   void answerQuestion(String answer) {
     answers.add(answer);
@@ -23,7 +26,7 @@ class _QuizifyState extends State<Quizify> {
     if (answers.length == questions.length) {
       setState(() {
         answers = [];
-        isQuizStarted = false;
+        activeScreen = ActiveScreen.result;
       });
     }
   }
@@ -33,9 +36,11 @@ class _QuizifyState extends State<Quizify> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.purple,
-        body: isQuizStarted
-            ? QuestionsScreen(onAnswered: answerQuestion)
-            : StartScreen(startQuiz: startQuiz),
+        body: switch (activeScreen) {
+          ActiveScreen.start => StartScreen(startQuiz: startQuiz),
+          ActiveScreen.questions => QuestionsScreen(onAnswered: answerQuestion),
+          ActiveScreen.result => const ResultScreen(),
+        },
       ),
     );
   }
