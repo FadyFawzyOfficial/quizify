@@ -11,9 +11,12 @@ class Quizify extends StatefulWidget {
 }
 
 class _QuizifyState extends State<Quizify> {
+  final List<String> answers = [];
   var isQuizStarted = false;
 
   void startQuiz() => setState(() => isQuizStarted = true);
+
+  void answerQuestion(String answer) => answers.add(answer);
 
   @override
   Widget build(context) {
@@ -21,7 +24,7 @@ class _QuizifyState extends State<Quizify> {
       home: Scaffold(
         backgroundColor: Colors.purple,
         body: isQuizStarted
-            ? const QuestionsScreen()
+            ? QuestionsScreen(onAnswered: answerQuestion)
             : StartScreen(startQuiz: startQuiz),
       ),
     );
