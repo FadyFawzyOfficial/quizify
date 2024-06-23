@@ -25,8 +25,8 @@ class _QuizifyState extends State<Quizify> {
 
     if (answers.length == questions.length) {
       setState(() {
-        answers = [];
         activeScreen = ActiveScreen.result;
+        answers = [];
       });
     }
   }
@@ -39,7 +39,7 @@ class _QuizifyState extends State<Quizify> {
         body: switch (activeScreen) {
           ActiveScreen.start => StartScreen(startQuiz: startQuiz),
           ActiveScreen.questions => QuestionsScreen(onAnswered: answerQuestion),
-          ActiveScreen.result => const ResultScreen(),
+          ActiveScreen.result => ResultScreen(selectedAnswers: answers),
         },
       ),
     );
