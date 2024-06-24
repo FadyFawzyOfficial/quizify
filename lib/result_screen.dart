@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'data/questions.dart';
-import 'quiz_result.dart';
+import 'quiz_result/quiz_result.dart';
 
 class ResultScreen extends StatelessWidget {
   final List<String> selectedAnswers;
