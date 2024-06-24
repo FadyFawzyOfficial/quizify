@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'data/questions.dart';
 import 'quiz_result.dart';
 
 class ResultScreen extends StatelessWidget {
   final List<String> selectedAnswers;
+  final VoidCallback onQuizRestarted;
 
-  const ResultScreen({super.key, required this.selectedAnswers});
+  const ResultScreen({
+    super.key,
+    required this.selectedAnswers,
+    required this.onQuizRestarted,
+  });
 
   @override
   Widget build(context) {
@@ -23,11 +29,20 @@ class ResultScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'You have answered $correctAnswersNumber of $questionsNumber questions correctly!',
+            'You answered $correctAnswersNumber out of $questionsNumber questions correctly!',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.lato(
+              color: Colors.purple[100],
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          QuizResult(summary: summary),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: QuizResult(summary: summary),
+          ),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: onQuizRestarted,
             icon: const Icon(Icons.replay_rounded),
             label: const Text('Restart Quiz!'),
           ),

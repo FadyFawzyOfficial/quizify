@@ -28,6 +28,13 @@ class _QuizifyState extends State<Quizify> {
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      activeScreen = ActiveScreen.start;
+      answers = [];
+    });
+  }
+
   @override
   Widget build(context) {
     return MaterialApp(
@@ -36,7 +43,8 @@ class _QuizifyState extends State<Quizify> {
         body: switch (activeScreen) {
           ActiveScreen.start => StartScreen(startQuiz: startQuiz),
           ActiveScreen.questions => QuestionsScreen(onAnswered: answerQuestion),
-          ActiveScreen.result => ResultScreen(selectedAnswers: answers),
+          ActiveScreen.result => ResultScreen(
+              selectedAnswers: answers, onQuizRestarted: restartQuiz),
         },
       ),
     );
