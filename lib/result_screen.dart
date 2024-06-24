@@ -10,13 +10,21 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final resultSummary = summary;
+    final questionsNumber = questions.length;
+    final correctAnswersNumber = resultSummary
+        .where((result) => result['user_answer'] == result['correct_answer'])
+        .length;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text('You have answered x of y questions correctly!'),
+          Text(
+            'You have answered $correctAnswersNumber of $questionsNumber questions correctly!',
+          ),
           QuizResult(summary: summary),
           ElevatedButton.icon(
             onPressed: () {},
