@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'data/questions.dart';
+
 class ResultScreen extends StatelessWidget {
   final List<String> selectedAnswers;
 
@@ -13,7 +15,7 @@ class ResultScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text('You have answered x of y questions correcltly!'),
+          const Text('You have answered x of y questions correctly!'),
           const Text('Result List'),
           ElevatedButton.icon(
             onPressed: () {},
@@ -23,5 +25,20 @@ class ResultScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<Map<String, Object>> get summary {
+    final List<Map<String, Object>> summary = [];
+
+    for (var i = 0; i < selectedAnswers.length; i++) {
+      summary.add({
+        'question_index': i,
+        'question': questions[i].question,
+        'correct_answer': questions[i].answers[0],
+        'user_answer': selectedAnswers[i],
+      });
+    }
+
+    return summary;
   }
 }
