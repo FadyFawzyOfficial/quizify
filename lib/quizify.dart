@@ -24,10 +24,7 @@ class _QuizifyState extends State<Quizify> {
     answers.add(answer);
 
     if (answers.length == questions.length) {
-      setState(() {
-        activeScreen = ActiveScreen.result;
-        answers = [];
-      });
+      setState(() => activeScreen = ActiveScreen.result);
     }
   }
 
